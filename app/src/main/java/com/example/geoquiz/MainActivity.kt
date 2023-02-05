@@ -1,10 +1,17 @@
 package com.example.geoquiz
 
+import android.nfc.Tag
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+
+// Adding a TAG constant
+private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
     // Resource ID's
@@ -25,7 +32,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Adding log statement
+        Log.d(TAG, "onCreate(Bundle?) called")
         setContentView(R.layout.activity_main)
+
+        val provider: ViewModelProvider = ViewModelProviders.of(this)
+        val quizViewModel = provider.get(QuizViewModel::class.java)
+        Log.d(TAG, "Got a QuizVIewModel: $quizViewModel")
 
         // Finding Resources by ID's
         trueButton = findViewById(R.id.true_button)
@@ -54,6 +67,21 @@ class MainActivity : AppCompatActivity() {
         updateQuestion()
 
     }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart() called")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume() called")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop() called")
+    }
     private fun updateQuestion() {
         val questionTextResId = questionBank[currentIndex].textResId
         questionTextView.setText(questionTextResId)
@@ -69,4 +97,5 @@ class MainActivity : AppCompatActivity() {
         }
         Toast.makeText(this,messageResId, Toast.LENGTH_SHORT).show()
     }
+
 }
