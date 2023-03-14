@@ -1,3 +1,4 @@
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.geoquiz.Question
 import com.example.geoquiz.R

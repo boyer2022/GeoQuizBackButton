@@ -53,8 +53,4 @@
         android:drawableEnd="@drawable/arrow_left"
         android:drawablePadding="4dp" />
 
-
-
-
-
 </FrameLayout>
